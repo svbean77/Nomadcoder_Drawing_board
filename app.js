@@ -15,12 +15,19 @@ const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraserBtn = document.getElementById("eraser-btn");
 
+//기타 요소 (파일, 텍스트, 저장)
+const fileInput = document.getElementById("file");
+const textInput = document.getElementById("text");
+const saveBtn = document.getElementById("save");
+
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
 
 canvas.width = CANVAS_WIDTH;
-canvas.height = 800;
-ctx.lineWidth = CANVAS_HEIGHT.value;
+canvas.height = CANVAS_HEIGHT;
+ctx.lineWidth = lineWidth.value;
+//브러쉬 형태를 둥글게 변경
+ctx.lineCap = "round";
 
 let isPainting = false;
 let isFilling = false;
@@ -122,3 +129,60 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
+
+/*
+기타 기능 관련 이벤트
+*/
+function onFileChange(event) {
+  //이미지 배경으로 로딩
+
+  //선택한 파일이 브라우저의 메모리에 존재
+  const file = event.target.files[0];
+  //메모리에 존재하는 object -> url (blob:~~)
+  //다른 브라우저에서는 사용할 수 없음
+  const url = URL.createObjectURL(file);
+
+  //아래와 동일: document.createElement("img");
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    //이미지, 시작x, 시작y, 너비, 높이
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    //이미지 여러 장 업로드 가능
+    fileInput.value = null;
+  };
+}
+
+function onDoubleClick(event) {
+  //텍스트 추가
+  const text = textInput.value;
+
+  if (text !== "") {
+    //브러쉬의 상태를 저장
+    ctx.save();
+
+    ctx.lineWidth = 1;
+    ctx.font = "48px sarif";
+    //글자를 채워줌 (strokeText는 글자 테두리만 존재)
+    ctx.fillText(text, event.offsetX, event.offsetY);
+
+    //브러쉬의 상태를 다시 가져옴
+    ctx.restore();
+  }
+}
+
+function onSaveClick() {
+  //그림 저장
+
+  //base64로 인코딩된 상태
+  const url = canvas.toDataURL();
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myDrawing.png";
+  a.click();
+}
+
+fileInput.addEventListener("change", onFileChange);
+canvas.addEventListener("dblclick", onDoubleClick);
+saveBtn.addEventListener("click", onSaveClick);
