@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas></canvas>
-    <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
-    <input id="color" type="color" />
-    <div>
+    <div class="color-options">
+      <input id="color" type="color" />
       <!-- 
             data- : 자바스크립트에서 html 요소를 사용해야할 때 직접 만들어 사용할 수 있음
         -->
@@ -71,12 +69,26 @@
         data-color="#4b6584"
       ></div>
     </div>
-    <button id="mode-btn">Fill</button>
-    <button id="destroy-btn">Destroy</button>
-    <button id="eraser-btn">Eraser</button>
-    <input id="file" type="file" accept="image/*" />
-    <input id="text" type="text" placeholder="Write and then double click" />
-    <button id="save">Save</button>
+    <canvas></canvas>
+    <div class="btns">
+      <input
+        id="line-width"
+        type="range"
+        min="1"
+        max="10"
+        value="5"
+        step="0.5"
+      />
+      <button id="mode-btn">Fill</button>
+      <button id="destroy-btn">Destroy</button>
+      <button id="eraser-btn">Eraser</button>
+      <!-- for과 id의 값이 같으면 위치와 상관 없이 해당 태그를 실행해줌 -->
+      <label for="file">
+        App Photo<input id="file" type="file" accept="image/*" />
+      </label>
+      <input id="text" type="text" placeholder="Add text here... :)" />
+      <button id="save">Save✏️</button>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
