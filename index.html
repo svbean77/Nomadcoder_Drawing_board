@@ -9,6 +9,71 @@
   </head>
   <body>
     <canvas></canvas>
+    <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
+    <input id="color" type="color" />
+    <div>
+      <!-- 
+            data- : 자바스크립트에서 html 요소를 사용해야할 때 직접 만들어 사용할 수 있음
+        -->
+      <div
+        class="color-option"
+        style="background-color: #fc5c65"
+        data-color="#fc5c65"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #fd9644"
+        data-color="#fd9644"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #fed330"
+        data-color="#fed330"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #26de81"
+        data-color="#26de81"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #2bcbba"
+        data-color="#2bcbba"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #45aaf2"
+        data-color="#45aaf2"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #4b7bec"
+        data-color="#4b7bec"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #a55eea"
+        data-color="#a55eea"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #d1d8e0"
+        data-color="#d1d8e0"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #778ca3"
+        data-color="#778ca3"
+      ></div>
+      <div
+        class="color-option"
+        style="background-color: #4b6584"
+        data-color="#4b6584"
+      ></div>
+    </div>
+    <button id="mode-btn">Fill</button>
+    <button id="destroy-btn">Destroy</button>
+    <button id="eraser-btn">Eraser</button>
     <script src="app.js"></script>
   </body>
 </html>
